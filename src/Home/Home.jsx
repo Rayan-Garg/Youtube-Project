@@ -40,7 +40,7 @@ export default function Home(){
         let items = itemSet.filter(item => 'snippet' in item && 'title' in item.snippet);
         items = items.sort((a,b) => a.snippet.title.length - b.snippet.title.length);
         setVidList(()=>items.map(item=>
-          (item.snippet.title && item.id.videoId) ? <LinkDiv id = {item.id.videoId} title = {item.snippet.title}/>
+          (item.snippet.title && item.id.videoId) ? <LinkDiv key = {item.etag} id = {item.id.videoId} title = {item.snippet.title}/>
            : console.log("failure"))
       )})
   
