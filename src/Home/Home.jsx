@@ -6,7 +6,6 @@ import LinkDiv from '../LinkDiv/LinkDiv';
 export default function Home(){
     let url = null;
     let tempVal = null;
-    const axios = require("axios");
     let regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let [videosId,setVideosId] = React.useState("");
     let [vidList,setVidList] = React.useState([]);
@@ -15,13 +14,14 @@ export default function Home(){
       if (event.key === 'Enter') {
       url = event.target.value;
       regExp.test(url) ? tempVal = url.match(regExp): console.log("Failure");
-      if (tempVal && tempVal[2].length == 11) {
+      if (tempVal && tempVal[2].length === 11) {
         setVideosId(prevVideosId => tempVal[2]);
       }}
     } 
   
     
     React.useEffect(()=>{
+      const axios = require("axios");
       if(videosId){
       const optionhome = {
         method: 'GET',
