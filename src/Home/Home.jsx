@@ -19,6 +19,7 @@ export default function Home(){
         setIsError(false);
         setVideosId(prevVideosId => tempVal[2]);
       }
+      else if(!url){}
       else{
         setIsError(true);
       }}
