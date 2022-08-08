@@ -9,11 +9,12 @@ export default function Home(){
     let regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     let [videosId,setVideosId] = React.useState("");
     let [vidList,setVidList] = React.useState([]);
-  
+    let [IsError,setIsError] = React.useState(false);
+
     function handleChange(event){
       if (event.key === 'Enter') {
       url = event.target.value;
-      regExp.test(url) ? tempVal = url.match(regExp): console.log("Failure");
+      regExp.test(url) ? tempVal = url.match(regExp) && setIsError(false): setIsError(true);
       if (tempVal && tempVal[2].length === 11) {
         setVideosId(prevVideosId => tempVal[2]);
       }}
@@ -53,6 +54,7 @@ export default function Home(){
           <h1 className = "lowheading">Put a link in below and click enter to view a clickable <br/> list of similar youtube videos.   
           </h1>
             <input type = "text" className = "subheading" placeholder='Put in a video url' onKeyDown = {handleChange}/>
+          {isError && <div className = "lowheading">Error. Not a proper youtube link.</div>}
           <div className = "youtube">
             {vidList}
           </div>
